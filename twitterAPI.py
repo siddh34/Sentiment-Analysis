@@ -23,23 +23,33 @@ api = tweepy.API(auth)
 
 numberOfTweets = 100
 
-cursor = tweepy.Cursor(api.user_timeline,id='@CNN',tweet_mode="extended").items(numberOfTweets)
+# cursor = tweepy.Cursor(api.user_timeline,id='@CNN',tweet_mode="extended").items(numberOfTweets)
 
 tweetText = []
 tweetLikes = []
 time = []
 
 # printing data
-for i in cursor:
-    tweetText.append(i.full_text)
-    tweetLikes.append(i.favorite_count)
-    time.append(i.created_at)
+# for i in cursor:
+#     tweetText.append(i.full_text)
+#     tweetLikes.append(i.favorite_count)
+#     time.append(i.created_at)
 
-df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
+# df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
 
-df.to_csv('CNN.csv')
+# df.to_csv('CNN.csv')
 
 # part 2
 
 # api search for covid 
-# cursor = tweepy.Cursor(api.search,q="covid",tweet_mode="extended").items(1)
+cursor = api.search_tweets(q="covid",lang="en",count=numberOfTweets,tweet_mode="extended")
+
+for i in cursor:
+    tweetText.append(i.full_text)
+    tweetLikes.append(i.favorite_count)
+    time.append(i.created_at)
+    # print(i)
+
+df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
+
+df.to_csv('covidNews.csv')
