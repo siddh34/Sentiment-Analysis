@@ -2,7 +2,6 @@ import tweepy
 import pandas as pd
 import configparser
 
-
 # read configuration
 
 config = configparser.ConfigParser()
@@ -25,31 +24,43 @@ numberOfTweets = 100
 
 # cursor = tweepy.Cursor(api.user_timeline,id='@CNN',tweet_mode="extended").items(numberOfTweets)
 
+# cursor = tweepy.Cursor(api.user_timeline,id='@FoxNews',tweet_mode="extended").items(numberOfTweets)
+
+# cursor = tweepy.Cursor(api.user_timeline,id='@BBCWorld',tweet_mode="extended").items(numberOfTweets)
+
+cursor = tweepy.Cursor(api.user_timeline,id='@SkyNews',tweet_mode="extended").items(numberOfTweets)
+
 tweetText = []
 tweetLikes = []
 time = []
 
 # printing data
-# for i in cursor:
-#     tweetText.append(i.full_text)
-#     tweetLikes.append(i.favorite_count)
-#     time.append(i.created_at)
-
-# df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
-
-# df.to_csv('CNN.csv')
-
-# part 2
-
-# api search for covid 
-cursor = api.search_tweets(q="covid",lang="en",count=numberOfTweets,tweet_mode="extended")
-
 for i in cursor:
     tweetText.append(i.full_text)
     tweetLikes.append(i.favorite_count)
     time.append(i.created_at)
-    # print(i)
 
 df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
 
-df.to_csv('covidNews.csv')
+# df.to_csv('CNN.csv')
+
+# df.to_csv('FoxNews.csv')
+
+# df.to_csv('BBCWorld.csv')
+
+df.to_csv('SkyNews.csv')
+
+# part 2
+
+# api search for covid 
+# cursor = api.search_tweets(q="covid",lang="en",count=numberOfTweets,tweet_mode="extended")
+
+# for i in cursor:
+#     tweetText.append(i.full_text)
+#     tweetLikes.append(i.favorite_count)
+#     time.append(i.created_at)
+#     # print(i)
+
+# df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
+
+# df.to_csv('covidNews.csv')
