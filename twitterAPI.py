@@ -2,7 +2,7 @@ import tweepy
 import pandas as pd
 import configparser
 
-# read configuration
+# * read configuration
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -21,6 +21,8 @@ auth.set_access_token(acessToken,acessSecretToken)
 api = tweepy.API(auth)
 
 numberOfTweets = 100
+
+# * Getting data from news channels (Just uncomment the cursor and run the following)
 
 # cursor = tweepy.Cursor(api.user_timeline,id='@CNN',tweet_mode="extended").items(numberOfTweets)
 
@@ -50,9 +52,10 @@ df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
 
 df.to_csv('SkyNews.csv')
 
-# part 2
+# * part 2 (just comment the upper cursor and uncomment the below code and run)
 
-# api search for covid 
+# * api search for covid 
+
 # cursor = api.search_tweets(q="covid",lang="en",count=numberOfTweets,tweet_mode="extended")
 
 # for i in cursor:
