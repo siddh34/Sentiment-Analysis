@@ -68,5 +68,44 @@ df.to_csv('SkyNews.csv')
 
 # df.to_csv('covidNews.csv')
 
-def getTwitData():
-    pass
+channelName = ['@CNN','@FoxNews','@BBCWorld','@SkyNews']
+
+def getTwitData(ID,numberOfTweets):
+    tweetText = []
+    tweetLikes = []
+    time = []
+
+    if(channelName > 3):
+        return
+
+    cursor = tweepy.Cursor(api.user_timeline,id=f'{channelName[ID]}',tweet_mode="extended").items(numberOfTweets)
+
+    for i in cursor:
+        tweetText.append(i.full_text)
+        tweetLikes.append(i.favorite_count)
+        time.append(i.created_at)
+
+    df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
+
+    return df
+
+
+if __name__ == '__main__':
+
+    dfCNN = getTwitData(0,100)
+
+    dfCNN.to_csv('CNN.csv')
+
+    dfFoxNews = getTwitData(1,100)
+
+    dfFoxNews.to_csv('FoxNews.csv')
+
+    dfBCCNews = getTwitData(2,100)
+
+    dfBCCNews.to_csv('BBCWorld.csv')
+
+    dfSkyNews = getTwitData(3,100)
+
+    dfSkyNews.to_csv('SkyNews.csv')
+
+    print("DONE!")
