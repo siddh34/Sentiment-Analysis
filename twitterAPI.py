@@ -67,3 +67,6 @@ df.to_csv('SkyNews.csv')
 # df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
 
 # df.to_csv('covidNews.csv')
+
+def getTwitData():
+    pass
