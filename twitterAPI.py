@@ -30,19 +30,19 @@ numberOfTweets = 100
 
 # cursor = tweepy.Cursor(api.user_timeline,id='@BBCWorld',tweet_mode="extended").items(numberOfTweets)
 
-cursor = tweepy.Cursor(api.user_timeline,id='@SkyNews',tweet_mode="extended").items(numberOfTweets)
+# cursor = tweepy.Cursor(api.user_timeline,id='@SkyNews',tweet_mode="extended").items(numberOfTweets)
 
-tweetText = []
-tweetLikes = []
-time = []
+# tweetText = []
+# tweetLikes = []
+# time = []
 
 # printing data
-for i in cursor:
-    tweetText.append(i.full_text)
-    tweetLikes.append(i.favorite_count)
-    time.append(i.created_at)
+# for i in cursor:
+#     tweetText.append(i.full_text)
+#     tweetLikes.append(i.favorite_count)
+#     time.append(i.created_at)
 
-df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
+# df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
 
 # df.to_csv('CNN.csv')
 
@@ -50,7 +50,7 @@ df = pd.DataFrame({'Tweet Text': tweetText,'Likes': tweetLikes,'Time': time})
 
 # df.to_csv('BBCWorld.csv')
 
-df.to_csv('SkyNews.csv')
+# df.to_csv('SkyNews.csv')
 
 # * part 2 (just comment the upper cursor and uncomment the below code and run)
 
@@ -75,7 +75,7 @@ def getTwitData(ID,numberOfTweets):
     tweetLikes = []
     time = []
 
-    if(channelName > 3):
+    if(ID > 4):
         return
 
     cursor = tweepy.Cursor(api.user_timeline,id=f'{channelName[ID]}',tweet_mode="extended").items(numberOfTweets)
